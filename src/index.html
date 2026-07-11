@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zume</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Zume</span>
+      </div>
+
+      <div class="day-nav">
+        <button id="prevDay" class="icon-btn" title="Previous day">&#8592;</button>
+        <button id="todayBtn" class="pill-btn">Today</button>
+        <div id="dateLabel" class="date-label">—</div>
+        <button id="nextDay" class="icon-btn" title="Next day">&#8594;</button>
+      </div>
+
+      <div class="actions">
+        <button id="openBulkAdd" class="primary-btn">+ Add Task List</button>
+        <button id="openSingleAdd" class="secondary-btn">+ Single Task</button>
+      </div>
+    </header>
+
+    <div class="legend">
+      <span class="legend-item"><span class="dot expired"></span> Expired</span>
+      <span class="legend-item"><span class="dot current"></span> Current</span>
+      <span class="legend-item"><span class="dot upcoming"></span> Upcoming</span>
+    </div>
+
+    <main class="calendar-wrap">
+      <div class="calendar-scroll" id="calendarScroll">
+        <div class="calendar" id="calendar">
+          <div class="hours-col" id="hoursCol"></div>
+          <div class="grid-col" id="gridCol">
+            <div class="now-line" id="nowLine"><span class="now-dot"></span></div>
+            <!-- task blocks injected here -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bulk add modal -->
+  <div class="modal-backdrop" id="bulkModalBackdrop">
+    <div class="modal">
+      <h2>Add your task list</h2>
+      <p class="modal-sub">One task per line. Each gets an equal time slot &mdash; adjust any of them later.</p>
+      <textarea id="bulkTextarea" rows="8" placeholder="e.g.&#10;Read research paper&#10;Write unit tests&#10;Gym&#10;Revise DSA topics"></textarea>
+
+      <div class="modal-row">
+        <label>
+          Slot length
+          <div class="inline-input">
+            <input type="number" id="bulkDurationHours" min="0" step="0.5" value="2" />
+            <span>hours</span>
+          </div>
+        </label>
+        <label>
+          Start time
+          <input type="time" id="bulkStartTime" />
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button class="secondary-btn" id="bulkCancel">Cancel</button>
+        <button class="primary-btn" id="bulkSubmit">Schedule tasks</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Single add / edit modal -->
+  <div class="modal-backdrop" id="taskModalBackdrop">
+    <div class="modal">
+      <h2 id="taskModalTitle">New task</h2>
+
+      <label class="field-label">Title
+        <input type="text" id="taskTitle" placeholder="Task title" />
+      </label>
+
+      <div class="modal-row">
+        <label class="field-label">Start
+          <input type="time" id="taskStart" />
+        </label>
+        <label class="field-label">End
+          <input type="time" id="taskEnd" />
+        </label>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="taskReminderEnabled" />
+        Remind me before this task starts
+      </label>
+
+      <div class="inline-input reminder-mins" id="reminderMinsRow">
+        <span>Remind</span>
+        <input type="number" id="taskReminderMinutes" min="1" value="10" />
+        <span>minutes before</span>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="taskCompleted" />
+        Mark as completed
+      </label>
+
+      <div class="modal-actions space-between">
+        <button class="danger-btn" id="taskDelete" style="display:none;">Delete</button>
+        <div class="modal-actions">
+          <button class="secondary-btn" id="taskCancel">Cancel</button>
+          <button class="primary-btn" id="taskSubmit">Save task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
