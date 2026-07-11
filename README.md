@@ -21,23 +21,34 @@ equal time blocks (default 2h each), and you drag/resize from there.
 
 ## Prerequisites
 
-You'll need Rust and the Tauri Linux system dependencies. On Debian/Ubuntu:
+You'll need Rust and the Tauri Linux system dependencies. On Arch Linux:
 
 ```bash
 # Rust (skip if you already have rustup — you need rustc 1.77+)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
 
 # Tauri v2 system deps
-sudo apt update
-sudo apt install -y libwebkit2gtk-4.1-dev libgtk-3-dev librsvg2-dev \
-  build-essential curl wget file libssl-dev libsqlite3-dev
+sudo pacman -Syu
+sudo pacman -S --needed \
+  base-devel \
+  webkit2gtk-4.1 \
+  gtk3 \
+  librsvg \
+  openssl \
+  sqlite \
+  pkgconf \
+  curl \
+  wget \
+  file \
+  libnotify
 
 # Tauri CLI
 cargo install tauri-cli --version "^2"
 ```
 
-`notify-send` (for reminders) ships by default on GNOME/KDE/XFCE. If it's
-missing: `sudo apt install libnotify-bin`.
+`notify-send` (for reminders) is provided by `libnotify`, which is installed in
+the command above.
 
 ## Run in dev mode
 
