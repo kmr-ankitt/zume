@@ -84,25 +84,6 @@ src/                 Frontend (plain HTML/CSS/JS, no build step)
   main.js             calendar rendering, drag/resize, CRUD calls
 ```
 
-## Notes / things worth knowing
+## Application 
 
-- **Why Tauri v2, not v1**: v1's webview library doesn't cleanly support
-  webkit2gtk-4.1 (what Ubuntu 24.04+ ships) — it crashes at runtime with a
-  `libsoup2`/`libsoup3` symbol conflict. v2 fixes this natively, so use v2.
-- **Equal time slots**: bulk-add divides tasks sequentially starting at your
-  chosen start time — task 1 gets `[start, start+duration)`, task 2 gets
-  `[end of task 1, +duration)`, etc. Nothing stops you from creating overlaps
-  afterward (e.g. dragging one on top of another) — the calendar just splits
-  the width between them.
-- **Reminders fire once**: a reminder marks itself "fired" after triggering,
-  so editing the task's start time or reminder settings re-arms it.
-- **I built and verified this compiles + links successfully** in my sandbox
-  using Tauri v1 (had to pin ~15 transitive crates down because the sandbox's
-  `apt`-provided rustc was an old 1.75 with no route to a newer toolchain —
-  not a real-world constraint). I then ported to v2 for the correct
-  webkit2gtk-4.1 support, but couldn't fully compile-verify v2 in that same
-  sandbox for the same rustc-version reason — a chain of gtk-rs/toml crates
-  hit a genuine conflict that only resolves with a modern toolchain. Your own
-  machine (you're already building sqlx/axum/tokio projects, so you've got a
-  current rustup toolchain) won't hit any of this — `cargo tauri build` should
-  just work. If it doesn't, paste me the error and I'll fix it fast.
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/320fbbba-9948-48f7-8531-2764459bc3c9" />
